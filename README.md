@@ -71,6 +71,28 @@ Dá pra criar conta nova pela tela de cadastro (senha mínima de 8 caracteres). 
 
 Os testes rodam em `chromium-desktop` (1440×900) e `chromium-mobile` (Pixel 5).
 
+## Qualidade (Lighthouse)
+
+O `scripts/lighthouse.mjs` audita a Início e o Detalhe em mobile e desktop, roda cada combinação três vezes e reporta a mediana. Sem argumento ele mira o preview local (`http://localhost:4173`); passando uma URL, audita o ambiente publicado:
+
+```bash
+npm run build
+npm run preview                 # em outro terminal
+npm run lighthouse              # local
+npm run lighthouse -- https://frontend-challenge-mocha.vercel.app   # publicado
+```
+
+Medições da URL publicada (mediana de 3), todas acima das metas do desafio (Performance ≥ 90, Accessibility ≥ 95, Best Practices ≥ 95, SEO ≥ 90):
+
+| Página | Perfil | Performance | Accessibility | Best Practices | SEO |
+|--------|--------|------------:|--------------:|---------------:|----:|
+| Início | mobile | 95 | 97 | 100 | 92 |
+| Início | desktop | 100 | 97 | 100 | 92 |
+| Detalhe | mobile | 98 | 100 | 100 | 92 |
+| Detalhe | desktop | 99 | 100 | 100 | 92 |
+
+Os relatórios HTML/JSON completos vão para `lighthouse-reports/` (fora do versionamento).
+
 ## Cenários de mock e reset
 
 A configuração dos mocks tem duas partes (ver `src/mocks/scenarios.ts`):
