@@ -37,7 +37,7 @@ function NftDetailPage() {
   const [tab, setTab] = useState<'detalhes' | 'avaliacoes'>('detalhes');
   const isMobile = useIsMobile();
 
-  if (query.isLoading) return <DetailSkeleton />;
+  if (query.isLoading) return <DetailSkeleton isMobile={isMobile} />;
 
   if (query.isError) {
     const notFound = query.error instanceof ApiError && query.error.code === 'not_found';
@@ -222,7 +222,7 @@ function NftDetailPage() {
   ) : (
       <div className="mx-auto w-full max-w-[1440px] space-y-12 px-6 py-8 sm:px-10 lg:px-16">
       <nav className="text-sm font-bold text-foreground" aria-label="Trilha">
-        <Link to="/" className="text-muted-foreground hover:text-foreground">
+        <Link to="/" className="text-muted-foreground underline underline-offset-2 hover:text-foreground">
           Início
         </Link>{' '}
         / <span>Mercado</span>
@@ -436,7 +436,25 @@ function NftDetailPage() {
   );
 }
 
-function DetailSkeleton() {
+function DetailSkeleton({ isMobile }: { isMobile: boolean }) {
+  if (isMobile) {
+    // mesma moldura fixa do modal mobile pra não empurrar o footer quando o conteúdo chega
+    return (
+      <div
+        className="fixed inset-0 z-[100] flex flex-col gap-4 overflow-y-auto p-4"
+        style={{ background: 'linear-gradient(143.28deg, #241612 -12%, #2F1D15 106.59%)' }}
+      >
+        <Skeleton className="aspect-square w-full rounded-2xl" />
+        <Skeleton className="h-6 w-2/3" />
+        <Skeleton className="h-20 w-full" />
+        <div className="mt-auto space-y-4">
+          <Skeleton className="h-6 w-32" />
+          <Skeleton className="h-[52px] w-full rounded-full" />
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="mx-auto w-full max-w-[1440px] px-6 py-8 sm:px-10 lg:px-16">
       <Skeleton className="mb-8 h-4 w-32" />

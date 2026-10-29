@@ -55,7 +55,7 @@ export function NftCard({
             loading="lazy"
             width={258}
             height={300}
-            className="size-full object-cover transition-transform duration-500 group-hover:scale-[1.03] lg:object-fill"
+            className="size-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
           />
           {soldOut && (
             <span className="absolute inset-0 grid place-items-center bg-background/60">

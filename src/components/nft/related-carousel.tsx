@@ -66,7 +66,7 @@ export function RelatedCarousel({
         </div>
       </div>
 
-      <div className="flex justify-center gap-2" role="tablist" aria-label="Páginas">
+      <div className="flex justify-center gap-1" role="tablist" aria-label="Páginas">
         {pages.map((_, i) => (
           <button
             key={i}
@@ -75,8 +75,15 @@ export function RelatedCarousel({
             aria-selected={i === page}
             aria-label={`Página ${i + 1}`}
             onClick={() => setPage(i)}
-            className={cn('size-2.5 rounded-full border border-[#D28A4C] transition-colors', i === page ? 'bg-[#D28A4C]' : 'bg-transparent hover:bg-[#D28A4C]/40')}
-          />
+            className="grid size-6 place-items-center"
+          >
+            <span
+              className={cn(
+                'size-2.5 rounded-full border border-[#D28A4C] transition-colors',
+                i === page ? 'bg-[#D28A4C]' : 'bg-transparent hover:bg-[#D28A4C]/40',
+              )}
+            />
+          </button>
         ))}
       </div>
     </section>
