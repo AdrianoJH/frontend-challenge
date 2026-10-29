@@ -1,0 +1,78 @@
+@import '@fontsource/roboto-mono/400.css';
+@import '@fontsource/roboto-mono/500.css';
+@import '@fontsource/roboto-mono/700.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 18 33.3% 5.9%; /* #140D0A */
+    --foreground: 36 33.3% 94.1%; /* #F5F1EB */
+    --card: 13.3 33.3% 10.6%; /* #241612 */
+    --card-foreground: 36 33% 94%;
+    --popover: 13 34% 9%;
+    --popover-foreground: 36 33% 94%;
+    --primary: 28 59.5% 56%; /* = #D28A4C exato */
+    --primary-foreground: 18 33% 6%;
+    --secondary: 16 35% 15%;
+    --secondary-foreground: 36 33% 94%;
+    --muted: 15 30% 14%;
+    --muted-foreground: 34 41.1% 68%; /* #CFB28C */
+    --accent: 28.6 76.2% 62.2%; /* #E89B55 */
+    --accent-foreground: 20 40% 8%;
+    --destructive: 2 68% 52%;
+    --destructive-foreground: 36 33% 96%;
+    --success: 146 40% 46%;
+    --success-foreground: 36 33% 96%;
+    --border: 15.8 43.2% 17.3%; /* #3F2319 */
+    --input: 15.8 43.2% 17.3%;
+    --ring: 28 59.5% 56%;
+    --radius: 0.5rem;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: 'Roboto Mono', ui-monospace, 'SFMono-Regular', monospace;
+  }
+
+  :focus-visible {
+    @apply outline-none ring-2 ring-ring ring-offset-2 ring-offset-background;
+  }
+}
+
+@layer components {
+  .skeleton {
+    @apply relative overflow-hidden rounded-md bg-muted/70;
+  }
+
+  .skeleton::after {
+    @apply absolute inset-0 -translate-x-full animate-shimmer;
+    content: '';
+    background-image: linear-gradient(90deg, transparent, hsl(36 33% 94% / 0.07), transparent);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .skeleton::after {
+    @apply hidden;
+  }
+}
